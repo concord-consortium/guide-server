@@ -8,7 +8,10 @@
   },
   "license": "https://github.com/IntelliMedia/guide-server/blob/master/LICENSE.md",
   "scripts": {
-    "start": "node guide.js",
+    "start": "npm run start:development",
+    "start:development": "NODE_ENV=development node guide.js",
+    "start:production": "NODE_ENV=production node guide.js",
+    "start:staging": "NODE_ENV=staging node guide.js",
     "test": "mocha --reporter spec --timeout 5000"
   },
   "dependencies": {
