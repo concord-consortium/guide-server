@@ -80,10 +80,10 @@ if (!process.env.BASE_PATH) {
   process.env.BASE_PATH = '/';
 }
 
-if (!process.env.MONGODB_URI) {
-  throw new Error("MONGODB_URI environment variable is not defined. Specify database in environment file.")
+if (!process.env.DB_URI) {
+  throw new Error("DB_URI environment variable is not defined. Specify database in environment file.")
 }
-let mongoDbUri = process.env.MONGODB_URI;
+let mongoDbUri = process.env.DB_URI;
 
 /**
  * Controllers (route handlers).

@@ -60,8 +60,8 @@ if (!process.env.BASE_PATH) {
   process.env.BASE_PATH = '/';
 }
 
-if (!process.env.MONGODB_URI) {
-  throw new Error("MONGODB_URI environment variable is not defined. Specify database in environment file.")
+if (!process.env.DB_URI) {
+  throw new Error("DB_URI environment variable is not defined. Specify database in environment file.")
 }
 
 try {
@@ -72,7 +72,7 @@ try {
     let googleDocId = args[1];
     let mongoDbUri = args[2];
     if (mongoDbUri) {
-      process.env.MONGODB_URI = mongoDbUri;
+      process.env.DB_URI = mongoDbUri;
     }
     learnParameters(googleDocId);
   } else {
@@ -92,11 +92,11 @@ function learnParameters(docId) {
   let studentIdsRepository = new StudentIdsRepository();
   studentIdsRepository.loadCollectionAsync(docId, true)
   .then((studentIds) =>
-  { 
+  {
     if (!studentIds || studentIds.length == 0) {
       throw new Error("Unable to find student IDs in Google Sheet: " + docId);
     }
-    let parameterLearner = new BKTParameterLearner(); 
+    let parameterLearner = new BKTParameterLearner();
     return parameterLearner.runAsync(studentIds);
   })
   .then((parameterLearner) => {
@@ -111,7 +111,7 @@ function learnParameters(docId) {
       filename = 'bkt-learning-stats-' + (datetime + ".csv");
       outfile = path.resolve(__dirname, filename);
       fs.writeFileSync(outfile, parameterLearner.statsCsv);
-      console.log(`Generated: ${outfile}`); 
+      console.log(`Generated: ${outfile}`);
   })
   .catch((err) => {
     console.error(err);
